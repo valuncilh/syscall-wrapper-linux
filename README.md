@@ -14,37 +14,20 @@
 patches/
 └── 0001-add-open-wrapper.patch    # Unified diff для fs/open.c
 docs/diagrams/
-├── syscall_path.puml/png          # Путь от userspace до VFS
-├── syscall_table.puml/png         # Таблица системных вызовов
 └── project_structure.puml/png     # Артефакты проекта
 src/
 └── kernel-config                  # .config для воспроизводимой сборки
 ```
 ### ![Project Structure](docs/diagrams/project_structure.png)
 
-## Run from Container Registry
+## Запуск из реестра контейнеров
 
 ```bash
 docker run --rm -it --device /dev/kvm ghcr.io/valuncilh/syscall-wrapper-linux:5.10.235
 ```
 
-After boot, inside the guest:
+После загрузки, внутри гостя:
 ```
-cat /etc/alpine-release
-dmesg | grep MY_OPEN
-```
-
-Exit QEMU: `Ctrl-A` then `X`.
-
-
-## Run from Container Registry
-
-```bash
-docker run --rm -it --device /dev/kvm ghcr.io/valuncilh/syscall-wrapper-linux:5.10.235
-```
-
-After boot, inside the guest:
-```sh
 cat /etc/alpine-release
 dmesg | grep MY_OPEN
 ```
