@@ -1,0 +1,35 @@
+@startuml syscall_table
+title Syscall Table and Wrapper Mechanism
+skinparam linetype ortho
+skinparam packageStyle rectangle
+
+package "syscall_64.tbl" {
+    [NR 0 read] as nr0
+    [NR 1 write] as nr1
+    [NR 2 open] as nr2
+    [NR 3 close] as nr3
+}
+
+package "sys_call_table[]" {
+    [__x64_sys_read] as t_read
+    [__x64_sys_write] as t_write
+    [__x64_sys_open_orig] as t_open_orig
+    [__x64_sys_close] as t_close
+}
+
+package "Wrapper (our patch)" {
+    [my_sys_open_wrapper] as wrapper
+    note right of wrapper
+      1. printk before
+      2. call orig
+      3. printk after
+    end note
+}
+
+nr0 --> t_read
+nr1 --> t_write
+nr2 --> wrapper : patched
+nr3 --> t_close
+wrapper --> t_open_orig : calls original
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml project_structure
+title Project Structure and Artifacts
+skinparam packageStyle rectangle
+
+package "src/" {
+    package "linux-5.10.y/" as kernel {
+        [arch/x86/entry/syscalls/syscall_64.tbl] as tbl
+        [kernel/sys.c or fs/open.c] as sys_c
+        [.config] as config
+        [arch/x86/boot/bzImage] as bzimage
+    }
+    
+    package "patches/" {
+        [0001-add-open-wrapper.patch] as patch
+    }
+    
+    package "docs/diagrams/" {
+        [syscall_path.puml] as puml1
+        [syscall_table.puml] as puml2
+        [project_structure.puml] as puml3
+    }
+    
+    [initramfs.cpio.gz] as initrd
+}
+
+package "QEMU Test Environment" {
+    [qemu-system-x86_64] as qemu
+    [Alpine rootfs] as alpine
+}
+
+tbl --> sys_c : references NR 2
+sys_c --> patch : generates
+patch --> bzimage : applied before build
+bzimage --> qemu : loaded
+initrd --> qemu : loaded
+alpine --> initrd : source
+puml1 --> puml2 : documents
+puml2 --> patch : informs design
+
+@enduml

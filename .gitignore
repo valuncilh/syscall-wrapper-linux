@@ -1,0 +1,26 @@
+# Build artifacts
+*.o
+*.ko
+*.mod.c
+*.symvers
+*.order
+vmlinux
+bzImage
+initramfs.cpio.gz
+.tmp_*
+Module.symvers
+modules.builtin*
+
+# Kernel source tree (too large for git)
+linux-5.10.*
+linux-5.10.y
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,41 @@
+@startuml syscall_path
+title Syscall Path Linux 5.10 x86_64
+skinparam linetype ortho
+skinparam packageStyle rectangle
+
+package Userspace {
+    [User Application] as app
+    [glibc wrapper] as libc
+}
+
+package Kernel_Entry {
+    [entry_SYSCALL_64] as entry
+    [do_syscall_64] as do_syscall
+    [sys_call_table] as sct
+}
+
+package Kernel_Core {
+    [__x64_sys_open] as sys_open
+    [do_sys_openat2] as do_openat2
+}
+
+package VFS_Layer {
+    [vfs_open] as vfs_open
+    [f_op open] as fop_open
+}
+
+package Filesystem {
+    [ext4_file_open] as ext4_open
+}
+
+app --> libc : open
+libc --> entry : syscall
+entry --> do_syscall : orig_ax
+do_syscall --> sct : lookup NR
+sct --> sys_open
+sys_open --> do_openat2
+do_openat2 --> vfs_open
+vfs_open --> fop_open
+fop_open --> ext4_open
+
+@enduml
