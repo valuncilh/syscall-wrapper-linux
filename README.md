@@ -20,11 +20,6 @@ docs/diagrams/
 src/
 └── kernel-config                  # .config для воспроизводимой сборки
 ```
-
-## Диаграммы
-
-### ![Syscall Path](docs/diagrams/syscall_path.png)
-
 ### ![Project Structure](docs/diagrams/project_structure.png)
 
 ## Run from Container Registry
