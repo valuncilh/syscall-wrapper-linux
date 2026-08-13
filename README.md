@@ -23,14 +23,9 @@ src/
 
 ## Диаграммы
 
-### Путь системного вызова
-![Syscall Path](docs/diagrams/syscall_path.png)
+### ![Syscall Path](docs/diagrams/syscall_path.png)
 
-### Структура проекта
-![Project Structure](docs/diagrams/project_structure.png)
-
-## Лицензия
-GPL-2.0 (патчи для ядра)
+### ![Project Structure](docs/diagrams/project_structure.png)
 
 ## Run from Container Registry
 
@@ -60,3 +55,6 @@ dmesg | grep MY_OPEN
 ```
 
 Exit QEMU: `Ctrl-A` then `X`.
+
+## Лицензия
+GPL-2.0 (патчи для ядра)
